@@ -1,19 +1,54 @@
-/* styles.css */
+/* style.css */
 
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f0f0f0; /* Light Gray background */
     color: #333;
 }
 
+nav {
+    background-color: #3498db; /* Soft Blue */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px; /* Adjust padding for your preference */
+    box-sizing: border-box;
+    
+}
+
+nav h1 {
+    color: #fff; /* White text for contrast */
+    margin: 0;
+}
+
+nav .search-bar {
+    margin-top: 10px;
+}
+
+nav .checkout-button {
+    background-color: #27ae60; /* Soft Green for Checkout */
+    color: #fff; /* White text for contrast */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+nav .checkout-button:hover {
+    background-color: #219d54; /* Darker green on hover */
+}
+
 #app {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #fff; /* White background for content */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 header {
@@ -22,12 +57,17 @@ header {
 }
 
 button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #e74c3c; /* Soft Red for Add to Cart */
+    color: #fff; /* White text for contrast */
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #c0392b; /* Darker red on hover */
 }
 
 main {
@@ -40,29 +80,42 @@ main {
     width: 48%;
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    background-color: #ecf0f1; /* Light Gray card background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+.lesson-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .lesson-card img {
     width: 100%;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-bottom: 10px;
 }
 
 .lesson-card h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
+    color: #333; /* Dark Gray text */
 }
 
 .lesson-card p {
     margin-bottom: 10px;
+    color: #666; /* Gray text */
 }
 
 .lesson-card button {
-    background-color: #007BFF;
+    background-color: #e74c3c; /* Soft Red for Add to Cart */
+    color: #fff; /* White text for contrast */
+    transition: background-color 0.3s ease;
+}
+
+.lesson-card button:hover {
+    background-color: #c0392b; /* Darker red on hover */
 }
 
 .lesson-icons {
@@ -72,156 +125,35 @@ main {
 
 .lesson-icons i {
     margin-right: 5px;
+    color: #3498db; /* Soft Blue icon color */
 }
 
-/* styles.css */
+/* Add this to your existing CSS */
 
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+nav .search-bar {
+    margin-top: 10px;
+    position: relative;
 }
 
-#app {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+nav .search-bar input[type="text"] {
+    padding: 8px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 200px; /* Adjust the width as needed */
 }
 
-main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.lesson-card {
-    width: 48%;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.lesson-card img {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.lesson-card h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.lesson-card p {
-    margin-bottom: 10px;
-}
-
-.lesson-card button {
-    background-color: #007BFF;
-}
-
-.lesson-icons {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.lesson-icons i {
-    margin-right: 5px;
-}
-
-/* styles.css */
-
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-#app {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+nav .search-bar button {
+    background-color: #3498db; /* Soft Blue for the search button */
+    color: #fff;
     border: none;
     border-radius: 5px;
+    padding: 8px 12px;
+    margin-left: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.lesson-card {
-    width: 48%;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.lesson-card img {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.lesson-card h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.lesson-card p {
-    margin-bottom: 10px;
-}
-
-.lesson-card button {
-    background-color: #007BFF;
-}
-
-.lesson-icons {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.lesson-icons i {
-    margin-right: 5px;
+nav .search-bar button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
 }
