@@ -6,6 +6,7 @@ body {
     padding: 0;
     background-color: #f0f0f0; /* Light Gray background */
     color: #333;
+    padding-top: 0px;
 }
 
 nav {
@@ -16,16 +17,25 @@ nav {
     align-items: center;
     padding: 15px; /* Adjust padding for your preference */
     box-sizing: border-box;
+    margin-bottom: 30px;
+    
     
 }
 
 nav h1 {
     color: #fff; /* White text for contrast */
     margin: 0;
+    margin-right: 650px;
+    
+}
+
+nav img {
+    height: 50px;
+    width: 50px;
 }
 
 nav .search-bar {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 nav .checkout-button {
@@ -42,10 +52,10 @@ nav .checkout-button:hover {
     background-color: #219d54; /* Darker green on hover */
 }
 
+
 #app {
     max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
     background-color: #fff; /* White background for content */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -74,17 +84,27 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 .lesson-card {
-    width: 48%;
-    margin-bottom: 20px;
+    width: 20%;
+    height: 40%;
+    margin-top: 20px;
+    margin: 10px;
+    float: right;
     padding: 20px;
     background-color: #ecf0f1; /* Light Gray card background */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     box-sizing: border-box;
     transition: box-shadow 0.3s ease;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .lesson-card:hover {
