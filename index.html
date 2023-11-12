@@ -1,20 +1,117 @@
-<html>
-    <head>
-        <title>After Class Activities App</title>
-        //Load Vue.js from a server (so no local file is needed)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <script src="lessons.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+            <button v-on:click="showCheckout">
+                {{ cartItemCount }}
+                <span class="fas fa-cart-plus"></span>
+                Checkout
+            </button>
+        </header>
+        <main>
+            <div v-if="showLesson">
+                <div v-for="lesson in lessons" :key="lesson.id" class="lesson-card">
+                    <figure>
+                        <img :src="lesson.image" alt="Lesson Image">
+                    </figure>
+                    <div class="lesson-icons">
+                        <i class="fas fa-book"></i><h2>{{ lesson.subject }}</h2>
+                    </div>
+                    <div class="lesson-icons">
+                        <i class="fa-map-marker-alt"></i><p>Location: {{ lesson.location }}</p>
+                    </div>
+                    <div class="lesson-icons" >
+                        <i class="fas fa-dollar-sign"></i><p>Price: {{ lesson.price }}</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-users" ></i><p>Available Space: {{ lesson.displaySpace }}</p>
+                    </div>
+                    <div class="lesson-icons" >
+                        <i class="fas fa-star"></i>
+                        <p>
+                            Rating:
+                            <span v-for="n in lesson.rating" key="n">★</span>
+                            <span v-for="n in 5 - lesson.rating" key="n">☆</span>
 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js" ></script>
-    </head>
-    <body>
-        <!--The element where Vue will mount-->
-        <div id="app"></div>
-        <script type="text/javascript" >
-            let webstore = new Vue({
-                //The Vue instance
-                el: '#app' //The 'option object': DOM mounting point
+                        </p>
 
-            });
+                    </div>
+                
+                    
+               
+                    <button v-on:click="addToCart(lesson)" v-if="canAddToCart(lesson)">
+                        Add to cart
+                    </button>
+                    <button disabled="disabled" v-else>
+                        Add to cart
+                    </button>
+                    <span v-if="lesson.displaySpace === cartCount(lesson.id)">
+                        All out!
+                    </span>
+                    <span v-else-if="lesson.displaySpace - cartCount(lesson.id) < 5">
+                        Only {{ lesson.displaySpace - cartCount(lesson.id) }} left!
+                    </span>
+                    <span v-else>
+                        Buy now!
+                    </span>
+                </div>
+            </div>
+            <div v-else>
+                <!-- Your checkout form goes here -->
+            </div>
+        </main>
+    </div>
 
-        </script>
-    </body>
+    
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                sitename: "Vue.js Lessons",
+                showLesson: true,
+                lessons: lesson, // Assuming you have included lesson.js
+                cart: []
+            },
+            methods: {
+                addToCart: function (lesson) {
+                    if (this.canAddToCart(lesson)) {
+                        this.cart.push(lesson.id);
+                    }
+                },
+                showCheckout() {
+                    this.showLesson = !this.showLesson;
+                },
+                cartCount(id) {
+                    let count = 0;
+                    for (let i = 0; i < this.cart.length; i++) {
+                        if (this.cart[i] === id) {
+                            count++;
+                        }
+                    }
+                    return count;
+                },
+                canAddToCart(lesson) {
+                    return lesson.displaySpace > this.cartCount(lesson.id);
+                }
+            },
+            computed: {
+                cartItemCount: function () {
+                    return this.cart.length;
+                }
+            }
+        });
+    </script>
+</body>
 </html>
