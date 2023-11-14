@@ -4,26 +4,24 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; /* Light Gray background */
+    background-color: #f0f0f0; 
     color: #333;
     padding-top: 0px;
 }
 
 nav {
-    background-color: #3498db; /* Soft Blue */
+    background-color: #3498db; 
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px; /* Adjust padding for your preference */
+    padding: 15px; 
     box-sizing: border-box;
     margin-bottom: 30px;
-    
-    
 }
 
 nav h1 {
-    color: #fff; /* White text for contrast */
+    color: #fff; 
     margin: 0;
     margin-right: 650px;
     
@@ -39,8 +37,8 @@ nav .search-bar {
 }
 
 nav .checkout-button {
-    background-color: #27ae60; /* Soft Green for Checkout */
-    color: #fff; /* White text for contrast */
+    background-color: #27ae60; 
+    color: #fff; 
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -49,16 +47,17 @@ nav .checkout-button {
 }
 
 nav .checkout-button:hover {
-    background-color: #219d54; /* Darker green on hover */
+    background-color: #219d54; 
 }
 
 
 #app {
     max-width: 100%;
     margin: 0 auto;
-    background-color: #fff; /* White background for content */
+    background-color: #fff; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    
 }
 
 header {
@@ -67,8 +66,8 @@ header {
 }
 
 button {
-    background-color: #e74c3c; /* Soft Red for Add to Cart */
-    color: #fff; /* White text for contrast */
+    background-color: #e74c3c; 
+    color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -77,24 +76,26 @@ button {
 }
 
 button:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b; 
 }
+
 
 main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 20px;
+    margin-right: 50px;
 }
 
 .lesson-card {
-    width: 20%;
-    height: 40%;
+    width: 400px;
+    height: 400px;
     margin-top: 20px;
     margin: 10px;
     float: right;
     padding: 20px;
-    background-color: #ecf0f1; /* Light Gray card background */
+    background-color: #a9dfbf; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     box-sizing: border-box;
@@ -108,34 +109,31 @@ main {
 }
 
 .lesson-card:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
 }
 
 .lesson-card img {
-    width: 100%;
+    width: 130px;
+    height: 130px;
+    padding-top: 10px;
+    display: inline-block;
     border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.lesson-card h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #333; /* Dark Gray text */
+    margin-bottom: 20px;
 }
 
 .lesson-card p {
     margin-bottom: 10px;
-    color: #666; /* Gray text */
+    color: #000000; 
 }
 
 .lesson-card button {
-    background-color: #e74c3c; /* Soft Red for Add to Cart */
-    color: #fff; /* White text for contrast */
+    background-color: #e74c3c; 
+    color: #fff; 
     transition: background-color 0.3s ease;
 }
 
 .lesson-card button:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b; 
 }
 
 .lesson-icons {
@@ -145,10 +143,27 @@ main {
 
 .lesson-icons i {
     margin-right: 5px;
-    color: #3498db; /* Soft Blue icon color */
+    color: #C41E3A; 
 }
 
-/* Add this to your existing CSS */
+#details {
+    /* padding-left: 20px; */
+    /* padding-bottom: 40px;   */
+    display: inline-flex;
+}
+
+#image {
+    /* display: inline-block; */
+    /* margin-left: -20px ; */
+    /* margin-top: -20px; */
+   
+}
+
+#lesson-details {
+    width: 200px;
+    
+}
+
 
 nav .search-bar {
     margin-top: 10px;
@@ -160,11 +175,11 @@ nav .search-bar input[type="text"] {
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 200px; /* Adjust the width as needed */
+    width: 200px; 
 }
 
 nav .search-bar button {
-    background-color: #3498db; /* Soft Blue for the search button */
+    background-color: #3498db; 
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -175,5 +190,21 @@ nav .search-bar button {
 }
 
 nav .search-bar button:hover {
-    background-color: #2980b9; /* Darker blue on hover */
+    background-color: #2980b9; 
 }
+
+/* Add this in your style.css file or in a style block in the head of your HTML */
+
+footer {
+    background-color: #333; /* Set background color */
+    color: #fff; /* Set text color */
+    padding: 20px; /* Add padding for spacing inside the footer */
+    text-align: center; /* Center-align text */
+}
+
+h1 {
+    margin: 0; /* Remove margin for better spacing */
+    font-size: 1.5em; /* Adjust the font size as needed */
+}
+
+

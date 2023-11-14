@@ -13,7 +13,7 @@
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 
             <!--Font-Awesome Link-->
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+            <script src="https://kit.fontawesome.com/3eae2c2108.js" crossorigin="anonymous"></script>
 
             <!--JavaScript File Linking-->
             <script src="lessons.js"></script>
@@ -29,96 +29,119 @@
 
         <!--NavBar-->
         <nav>
-            <img src="images/Favicon.png" >
+            <img src="images/Favicon.png">
             <h1 v-text="sitename"></h1>
+            
             <!--Search Bar-->
             <div class="search-bar" >
                 <input type="text" placeholder="Search.."/>
             </div>
+
+            <!--Checkout Button-->
             <button class="checkout-button" v-on:click="showCheckout">
                 {{ cartItemCount}}
                 <span class="fas fa-cart-plus" ></span>
                 Checkout
             </button>
+
         </nav>
         <main>
-            <div v-if="showLesson" class="clearfix">
-                <div v-for="lesson in lessons" :key="lesson.id" class="lesson-card">
-                    <figure>
-                        <img v-bind:src="lesson.image" alt="Lesson Image">
-                    </figure>
-                    <div class="lesson-icons">
-                        <i class="fas fa-book"></i><p>Subject:{{ lesson.subject }}</p>
-                    </div>
-                    <div class="lesson-icons">
-                        <i class="fa-map-marker-alt"></i><p>Location: {{ lesson.location }}</p>
-                    </div>
-                    <div class="lesson-icons" >
-                        <i class="fas fa-dollar-sign"></i><p>Price: {{ lesson.price }}</p>
-                    </div>
-                    <div>
-                        <i class="fas fa-users" ></i><p>Available Space: {{ lesson.displaySpace - cartCount (lesson.id) }}</p>
-                    </div>
-                    <div class="lesson-icons" >
-                        <i class="fas fa-star"></i>
-                        <p>
-                            Rating:
-                            <span v-for="n in lesson.rating" key="n">★</span>
-                            <span v-for="n in 5 - lesson.rating" key="n">☆</span>
+                <div v-if="showLesson" class="clearfix">
+                    <div v-for="lesson in lessons" :key="lesson.id" class="lesson-card">
 
-                        </p>
+                        <div id="details">
+                            <div id="lesson-details">
 
-                    </div>
-                
-                    
-                    <button v-on:click="addToCart(lesson)" v-if="canAddToCart(lesson)">
-                        Add to cart
-                    </button>
-                    <button disabled="disabled" v-else>
-                        Add to cart
-                    </button>
-                    <span v-if="lesson.displaySpace === cartCount(lesson.id)">
-                        All out!
-                    </span>
-                    <span v-else-if="lesson.displaySpace - cartCount(lesson.id) < 5">
-                        Only {{ lesson.displaySpace - cartCount(lesson.id) }} left!
-                    </span>
-                    <span v-else>
-                        Buy now!
-                    </span>
+                            
+                                <div class="lesson-icons"><p>
+                                    <i class="fa-solid fa-book"></i><span> Subject: {{ lesson.subject }}</span></p>
+                                </div>
+                                
+                                <div class="lesson-icons"><p>
+                                    <i class="fa-sharp fa-solid fa-location-dot"></i><span> Location: {{ lesson.location }}</span></p>
+                                </div>
+
+                                <div class="lesson-icons"><p>
+                                    <i class="fas fa-dollar-sign"></i><span> Price: {{ lesson.price }}</span></p>
+                                </div>
+
+                                <div><p>
+                                    <i class="fas fa-users" ></i><span>  Available Space: {{ lesson.displaySpace - cartCount (lesson.id) }}</span></p>
+                                </div>
+
+                                <div class="lesson-icons" ><p>
+                                       <span> Rating: </span>
+                                        <span v-for="n in lesson.rating" key="n"><i class="fas fa-star"></i></span>
+                                        <span v-for="n in 5 - lesson.rating" key="n"><i class="fa-regular fa-star"></i></span>
+                                    </p>
+                                </div>
+
+                                <button v-on:click="addToCart(lesson)" v-if="canAddToCart(lesson)">
+                                            Add to cart
+                                </button>
+
+                                <button class="cart-button" disabled="disabled" v-else>
+                                            Add to cart
+                                </button>
+                                <br>
+                                <span v-if="lesson.displaySpace === cartCount(lesson.id)">
+                                            All out!
+                                </span>
+
+                                <span v-else-if="lesson.displaySpace - cartCount(lesson.id) < 5">
+                                        Only {{ lesson.displaySpace - cartCount(lesson.id) }} left!
+                                </span>
+                                
+
+                                <span v-else><br>
+                                    Buy now!
+                                </span>
+                            </div>
+
+                            <div id="image">
+                                <figure>
+                                    <img id="imgsize" v-bind:src="lesson.image" alt="Lesson Image">
+                                </figure>
+                                                        
+                            </div>
+                            
+                        </div>
+
+                    </div>     
                 </div>
-            </div>
-            <div v-else>
-                <h2>Checkout</h2>
-                <p>
-                    <strong>First Name:</strong>
-                    <input v-model.trim="order.firstName"/>
-                </p>
-                <p>
-                    <strong>Last Name:</strong>
-                    <input v-model.trim="order.lastname" />
-                </p>
 
-                <p><strong>Address:</strong><input v-model="order.address" /></p>
-                <p><strong>City:</strong><input v-model="order.city" /></p>
-                <p>
-                    <strong>State: </strong>
+                <div v-else>
 
-                    <select v-model="order.state" >
-                        <option disabled value="">State</option>
-                        <option v-bind:value="states.AL" >AL</option>
-                        <option v-bind:value="states.AR" >AR</option>
-                        <option v-bind:value="states.CA" >CA</option>
-                        <option v-bind:value="states.NV" >NV</option>
-                        <option v-for="(state, key) in states"
-                            v-bind:value="state">
-                            {{key}}
-                        </option>
-                    </select>
-                </p>
+                    <h2>Checkout</h2>
+                    <p>
+                        <strong>First Name:</strong>
+                        <input v-model.trim="order.firstName"/>
+                    </p>
+                    <p>
+                        <strong>Last Name:</strong>
+                        <input v-model.trim="order.lastname" />
+                    </p>
 
-                <p><strong>Zip/Postal Code:</strong><input v-model.number="order.zip" 
-                    type="number"/></p>
+                    <p><strong>Address:</strong><input v-model="order.address" /></p>
+                    <p><strong>City:</strong><input v-model="order.city" /></p>
+                    <p>
+                            <strong>State: </strong>
+
+                            <select v-model="order.state" >
+                                <option disabled value="">State</option>
+                                <option v-bind:value="states.AL" >AL</option>
+                                <option v-bind:value="states.AR" >AR</option>
+                                <option v-bind:value="states.CA" >CA</option>
+                                <option v-bind:value="states.NV" >NV</option>
+                                <option v-for="(state, key) in states"
+                                    v-bind:value="state">
+                                    {{key}}
+                                </option>
+                            </select>
+                    </p>
+
+                    <p><strong>Zip/Postal Code:</strong><input v-model.number="order.zip" 
+                     type="number"/></p>
 
                     <p><input type="checkbox" id="gift" value="true" 
                         v-model="order.gift"
@@ -131,6 +154,7 @@
                         <input type="radio" id="business" value="Business" v-model="order.method">
                         <label for="business">Business</label>
                     </p>
+
                     <h2>Order Information</h2>
                     <p>First Name: {{order.firstName}}</p>
                     <p>Last Name: {{order.lastname}}</p>
@@ -141,12 +165,16 @@
                     <p>Gift?{{order.gift}}</p>
                     <p>Method:{{order.method}}</p>
 
-
                     <button v-on:click="submitForm" >Place Order</button>
-                <!-- Your checkout form goes here -->
-            </div>
+            
+                </div>
         </main>
     </div>
+    <br><br>
+    <footer>
+        <!-- Footer content -->
+        <h1 >SABA SHAIKH M00850503</h1>
+    </footer>
 
     
     <script>

@@ -6,7 +6,7 @@ let lesson = [
         location: "Dubai Sports City",
         price: 7000,
         space: 5,
-        image: "images/Archery.png",
+        image: "images/Archery.png", 
         rating: 3,
         displaySpace: 5,
     },
