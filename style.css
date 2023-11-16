@@ -3,10 +3,9 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 0px;
     background-color: #f0f0f0; 
     color: #333;
-    padding-top: 0px;
 }
 
 nav {
@@ -23,7 +22,7 @@ nav {
 nav h1 {
     color: #fff; 
     margin: 0;
-    margin-right: 650px;
+    margin-right: 650px; */
     
 }
 
@@ -84,18 +83,18 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 20px;
-    margin-right: 50px;
+    margin-top: 30px;
+    /* margin-right: 50px; */
 }
 
 .lesson-card {
     width: 400px;
     height: 400px;
-    margin-top: 20px;
     margin: 10px;
     float: right;
     padding: 20px;
-    background-color: #a9dfbf; 
+    background-color: #f8f9fa; 
+    color: #212529;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     box-sizing: border-box;
@@ -109,7 +108,7 @@ main {
 }
 
 .lesson-card:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .lesson-card img {
@@ -123,17 +122,20 @@ main {
 
 .lesson-card p {
     margin-bottom: 10px;
-    color: #000000; 
 }
 
 .lesson-card button {
-    background-color: #e74c3c; 
+    background-color: #007bff; 
     color: #fff; 
-    transition: background-color 0.3s ease;
+    border: 1px solid #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .lesson-card button:hover {
-    background-color: #c0392b; 
+    background-color: #0056b3; 
 }
 
 .lesson-icons {
@@ -152,16 +154,10 @@ main {
     display: inline-flex;
 }
 
-#image {
-    /* display: inline-block; */
-    /* margin-left: -20px ; */
-    /* margin-top: -20px; */
-   
-}
 
 #lesson-details {
     width: 200px;
-    
+
 }
 
 
@@ -206,5 +202,3 @@ h1 {
     margin: 0; /* Remove margin for better spacing */
     font-size: 1.5em; /* Adjust the font size as needed */
 }
-
-

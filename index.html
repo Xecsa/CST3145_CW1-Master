@@ -25,6 +25,7 @@
 
 <body>
     <!--Created a div for Vue element-->
+    <!--Mounting an app-->
     <div id="app">
 
         <!--NavBar-->
@@ -46,9 +47,29 @@
 
         </nav>
         <main>
+                <!-- Creating 'Lessons' page -->
                 <div v-if="showLesson" class="clearfix">
+
+                    <div id="sort-section">
+                        <h2>Sort By</h2>
+                        <label>
+                            <input type="radio"  value="Subject"/> Subject
+                        </label> <br />
+                        <label>
+                            <input type="radio"  value="Location" /> Location
+                        </label> <br/>
+                        <label>
+                            <input type="radio" value="Price"> Price
+                        </label><br/>
+                        <label>
+                            <input type="radio"  value="Space" /> Space
+                        </label>
+
+                    </div>
+
                     <div v-for="lesson in lessons" :key="lesson.id" class="lesson-card">
 
+                        <!--the product information-->
                         <div id="details">
                             <div id="lesson-details">
 
@@ -69,6 +90,7 @@
                                     <i class="fas fa-users" ></i><span>  Available Space: {{ lesson.displaySpace - cartCount (lesson.id) }}</span></p>
                                 </div>
 
+                                <!--rating-->
                                 <div class="lesson-icons" ><p>
                                        <span> Rating: </span>
                                         <span v-for="n in lesson.rating" key="n"><i class="fas fa-star"></i></span>
@@ -76,6 +98,7 @@
                                     </p>
                                 </div>
 
+                                <!-- 'add to cart' button-->
                                 <button v-on:click="addToCart(lesson)" v-if="canAddToCart(lesson)">
                                             Add to cart
                                 </button>
@@ -112,6 +135,7 @@
 
                 <div v-else>
 
+                    <!--the 'checkout' page-->
                     <h2>Checkout</h2>
                     <p>
                         <strong>First Name:</strong>
@@ -206,6 +230,7 @@
 
                 cart: []
             },
+            //the methods of Vue instance
             methods: {
                 addToCart: function (lesson) {
                     if (this.canAddToCart(lesson)) {
