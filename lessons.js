@@ -23,7 +23,7 @@ let lesson = [
     {
         id: 1003,
         subject: "Boxing",
-        location: "Jumeirah Village Cirlce",
+        location: "Jumeirah Village Circle",
         price: 4000,
         space: 5,
         image: "images/boxing.png",
@@ -33,7 +33,7 @@ let lesson = [
     {
         id: 1004,
         subject: "Coding and Programming",
-        location: "Dubai Knowledge Village",
+        location: "Dubai Knowledge Park",
         price: 5000,
         space: 5,
         image: "images/Coding.png",

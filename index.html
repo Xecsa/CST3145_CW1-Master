@@ -39,7 +39,7 @@
             </div>
 
             <!--Checkout Button-->
-            <button class="checkout-button" v-on:click="showCheckout">
+            <button class="checkout-button" v-on:click="showCheckout" v-bind:disabled="isCartEmpty">
                 {{ cartItemCount}}
                 <span class="fas fa-cart-plus" ></span>
                 Checkout
@@ -86,9 +86,6 @@
             </div>
                 
 
-
-    
-
                     <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-card">
 
                         <!--the product information-->
@@ -125,13 +122,13 @@
                                 </div>
 
                                 <!-- 'add to cart' button-->
-                                <button v-on:click="addToCart(lesson)" v-if="canAddToCart(lesson)">
+                                <button class="cart-button" v-on:click="addToCart(lesson)" v-bind:disabled="!canAddToCart(lesson)" >
                                             Add to cart
                                 </button>
 
-                                <button class="cart-button" disabled="disabled" v-else>
-                                            Add to cart
-                                </button>
+                                <!-- <button class="cart-button" disabled="disabled" v-else> -->
+                                            <!-- Add to cart -->
+                                <!-- </button> -->
                                 <br>
                                 <span v-if="lesson.displaySpace === cartCount(lesson.id)">
                                             All out!
@@ -233,14 +230,22 @@
             data: {
                 sitename: "Lessons Hub",
                 showLesson: true,
+                isCartEmpty: true,
                 lessons: lesson, // Assuming you have included lesson.js
-
+                //order locations
                 states: {
-                    AL: 'Dubai Marina',
-                    AR: 'Arizona',
-                    CA: 'California',
-                    NV: 'Nevada'
+                    DSC: 'Dubai Sports City',
+                    DM: 'Dubai Marina',
+                    JVC: 'Jumeirah Village Circle',
+                    DKP: 'Dubai Knowledge Park',
+                    MR: 'Mirdif',
+                    DIC: 'Dubai Internet City',
+                    JM: 'Jumeirah',
+                    BR: 'Al Barsha',
+                    GR: 'Greens'
+
                 },
+                //order details
                 order: {
                     firstname: '',
                     lastname: '',
@@ -251,7 +256,8 @@
                     method: 'Home',
                     gift: false,
                     sendGift: 'Send as a gift',
-                    dontSendGift: 'Do not send as a gift'
+                    dontSendGift: 'Do not send as a gift',
+                    cart:"",
                 },
                 sort: {
                     by: "subject", //default sorting attribute
@@ -266,6 +272,7 @@
                 addToCart: function (lesson) {
                     if (this.canAddToCart(lesson)) {
                         this.cart.push(lesson.id);
+                        this.isCartEmpty = false; //set to false when a lesson is added
                     }
                 },
                 showCheckout() {
