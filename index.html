@@ -35,7 +35,7 @@
             
             <!--Search Bar-->
             <div class="search-bar" >
-                <input type="text" placeholder="Search.."/>
+                <input type="text" placeholder="Search" />
             </div>
 
             <!--Checkout Button-->
@@ -48,26 +48,48 @@
         </nav>
         <main>
                 <!-- Creating 'Lessons' page -->
-                <div v-if="showLesson" class="clearfix">
+                <div v-if="showLesson" class="clearfix" style="display: flex; flex-wrap: wrap; justify-content: flex-start;" >
 
-                    <div id="sort-section">
-                        <h2>Sort By</h2>
-                        <label>
-                            <input type="radio"  value="Subject"/> Subject
-                        </label> <br />
-                        <label>
-                            <input type="radio"  value="Location" /> Location
-                        </label> <br/>
-                        <label>
-                            <input type="radio" value="Price"> Price
-                        </label><br/>
-                        <label>
-                            <input type="radio"  value="Space" /> Space
-                        </label>
-
+                <!-- Sorting section -->
+                <div class="sort-section" style="display: flex; flex-wrap: wrap; justify-content: space-between; width: 100%; ">
+                    <label>Sort by:</label>
+                <div class="sort-options">
+                    <div>
+                        <input type="radio" id="sortBySubject" value="subject" v-model="sort.by">
+                        <label for="sortBySubject">Subject</label>
                     </div>
+                    <div>
+                        <input type="radio" id="sortByLocation" value="location" v-model="sort.by">
+                        <label for="sortByLocation">Location</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="sortByPrice" value="price" v-model="sort.by">
+                        <label for="sortByPrice">Price</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="sortByAvailability" value="availability" v-model="sort.by">
+                        <label for="sortByAvailability">Availability</label>
+                    </div>
+                </div>
+                
+                    <label>Order:</label>
+                <div class="sort-options" >
+                    <div>
+                        <input type="radio" id="ascending" value="asc" v-model="sort.order">
+                        <label for="ascending">Ascending</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="descending" value="desc" v-model="sort.order">
+                        <label for="descending">Descending</label>
+                    </div>
+                </div>
+            </div>
+                
 
-                    <div v-for="lesson in lessons" :key="lesson.id" class="lesson-card">
+
+    
+
+                    <div v-for="lesson in sortedLessons" :key="lesson.id" class="lesson-card">
 
                         <!--the product information-->
                         <div id="details">
@@ -93,8 +115,12 @@
                                 <!--rating-->
                                 <div class="lesson-icons" ><p>
                                        <span> Rating: </span>
-                                        <span v-for="n in lesson.rating" key="n"><i class="fas fa-star"></i></span>
-                                        <span v-for="n in 5 - lesson.rating" key="n"><i class="fa-regular fa-star"></i></span>
+                                        <span v-for="(star, index) in lesson.rating" :key="index">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                        <span v-for="n in 5 - lesson.rating" :key="`empty-${n}`">
+                                            <i class="fa-regular fa-star"></i>
+                                        </span>
                                     </p>
                                 </div>
 
@@ -210,7 +236,7 @@
                 lessons: lesson, // Assuming you have included lesson.js
 
                 states: {
-                    AL: 'Alabama',
+                    AL: 'Dubai Marina',
                     AR: 'Arizona',
                     CA: 'California',
                     NV: 'Nevada'
@@ -227,8 +253,13 @@
                     sendGift: 'Send as a gift',
                     dontSendGift: 'Do not send as a gift'
                 },
-
-                cart: []
+                sort: {
+                    by: "subject", //default sorting attribute
+                    order: "asc",    //default sorting order 
+                },
+                cart: [],
+                showPlaceOrder: false,
+                displayCart: [],
             },
             //the methods of Vue instance
             methods: {
@@ -259,9 +290,57 @@
             computed: {
                 cartItemCount: function () {
                     return this.cart.length;
-                }
+                },
+                // search and sorting products
+                sortedLessons() {
+                    let lessonsArr = this.lessons.slice(0);
 
-        },
+                    //sorting price
+                    if (this.sort.by === 'price'){
+                        return this.sort.order === 'asc' ?
+                            lessonsArr.sort((a, b) => a.price - b.price) :
+                            lessonsArr.sort((a, b) => b.price - a.price);
+                    }
+
+                    //sorting spaces
+                    // sorting spaces
+                    if (this.sort.by === 'availability') {
+                        return this.sort.order === 'asc' ?
+                            lessonsArr.sort((a, b) => (a.displaySpace - this.cartCount(a.id)) - (b.displaySpace - this.cartCount(b.id))) :
+                            lessonsArr.sort((a, b) => (b.displaySpace - this.cartCount(b.id)) - (a.displaySpace - this.cartCount(a.id)));
+                    }   
+
+
+                    // sorting subject
+                    if (this.sort.by === 'subject') {
+                        return lessonsArr.sort((a, b) => {
+                            const subjectA = a.subject.toLowerCase();
+                            const subjectB = b.subject.toLowerCase();
+                            if (this.sort.order === 'asc') {
+                                return a.subject.localeCompare(subjectB);
+                            } else {
+                                return b.subject.localeCompare(subjectA);
+                            }
+                        });
+                    }
+
+                    // sorting location
+                    if (this.sort.by === 'location') {
+                         return lessonsArr.sort((a, b) => {
+                            if (this.sort.order === 'asc') {
+                                return a.location.localeCompare(b.location);
+                            } else {
+                                return b.location.localeCompare(a.location);
+                            }
+                        });
+                    }
+
+                    // Default case, return the original array
+                    return lessonsArr;
+
+                }
+    
+            }
         });
     </script>
 </body>
