@@ -113,7 +113,7 @@ main {
 .lesson-card:hover {
     transform: translateY-5px();
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3 ease;
+    transition: transform 0.3s ease, box-shadow 0.3 ease 0.2;
 }
 
 .lesson-card img {
@@ -267,6 +267,102 @@ h1 {
     border-radius: 4px;
 }
 
+#Checkout-cart {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#Checkout-cart h2 {
+    color: #007bff; /* Blue color */
+    text-align: center;
+}
+
+.cart-items {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #dee2e6; /* Light gray border */
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+.cart-item-image {
+    width: 130px;
+    height: 130px;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+
+/* Apply styles to the lesson-details within Checkout-cart */
+
+#Checkout-cart .cart-item {
+    display: flex;
+    /* align-items: center; */
+    margin-bottom: 15px;
+}
+
+#Checkout-cart .lesson-card {
+    flex: 1;
+    margin-right: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#Checkout-cart .lesson-card .lesson-details {
+    padding: 15px;
+}
+
+#Checkout-cart .lesson-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin-top: 15px; */
+    width: 200px;
+    height: 300px;
+}
+
+/* Style each detail within lesson-details */
+#Checkout-cart .lesson-details p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+/* Style the remove-from-cart-button within lesson-details */
+#Checkout-cart .lesson-details .remove-from-cart-button {
+    /* margin-top: 10px; */
+    background-color: #dc3545; /* Red color */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#Checkout-cart .lesson-details .remove-from-cart-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Style the cart-item-image within lesson-details */
+#Checkout-cart .lesson-details .cart-item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
 
 
 

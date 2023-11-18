@@ -40,13 +40,21 @@
 
             <!--Checkout Button-->
             <button class="checkout-button" v-on:click="showCheckout" v-bind:disabled="isCartEmpty">
-                {{ cartItemCount}}
-                <span class="fas fa-cart-plus" ></span>
-                Checkout
+                <span v-if="!showCheckoutPage" >
+                    {{ cartItemCount}}
+                    <span class="fas fa-cart-plus" ></span>
+                    Checkout
+                </span>
+                <span v-else>
+                    <span class="fas fa-home" ></span>
+                    Home
+                </span>
+                
             </button>
 
         </nav>
         <main>
+                <div v-if="!showCheckoutPage" >
                 <!-- Creating 'Lessons' page -->
                 <div v-if="showLesson" class="clearfix" style="display: flex; flex-wrap: wrap; justify-content: flex-start;" >
 
@@ -155,8 +163,71 @@
 
                     </div>     
                 </div>
+            </div>
 
                 <div v-else>
+                    <div id="Checkout-cart">
+                        <h2>Shopping Cart</h2>
+                        <div id="cart-items" class="cart-items">
+                            <div class="cart-item" v-for="lessonId in cartLessons" :key="lessonId">
+                                <div v-for="lesson in lessons" :key="lesson.id" v-if="lesson.id === lessonId" class="lesson-card">
+                                    <div class="lesson-details" >
+                                        <div class="cart-item-image-container">
+                                            <figure>
+                                                <img class="cart-item-image" v-bind:src="lesson.image" >
+                                            </figure>
+                                        </div>
+                                    <div class="lesson-icons">
+                                        <p>
+                                            <i class="fa-solid fa-book"></i><span> Subject: {{ lesson.subject }}</span>
+                                        </p>
+                                    </div>
+                                    <div class="lesson-icons">
+                                        <p>
+                                            <i class="fa-sharp fa-solid fa-location-dot"></i><span> Location: {{ lesson.location}} </span>
+                                        </p>
+                                    </div>
+                                    <div class="lesson-icons">
+                                        <p>
+                                            <i class="fas fa-dollar-sign"></i><span> Price: {{ lesson.price }} </span>
+                                        </p>
+                                    </div>
+
+                                    <!--rating-->
+                                    <div class="lesson-icons" ><p>
+                                        <span> Rating: </span>
+                                            <span v-for="(star, index) in lesson.rating" :key="index">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                        <span v-for="n in 5 - lesson.rating" :key="`empty-${n}`">
+                                            <i class="fa-regular fa-star"></i>
+                                        </span>
+                                    </p>
+                                    </div>
+
+                                    <button class="remove-from-cart-button" @click="removeFromCart(lesson.id)">
+                                        Remove
+                                    </button>
+
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                                
+                                
+                                
+                                
+
+                                
+                            </div>
+                        </div>
+
+
+                        </div>
+
+                    </div>
 
                     <!--the 'checkout' page-->
                     <h2>Checkout</h2>
@@ -231,6 +302,8 @@
                 sitename: "Lessons Hub",
                 showLesson: true,
                 isCartEmpty: true,
+                showCheckoutPage: false,
+                cartLessons:[],
                 lessons: lesson, // Assuming you have included lesson.js
                 //order locations
                 states: {
@@ -271,12 +344,13 @@
             methods: {
                 addToCart: function (lesson) {
                     if (this.canAddToCart(lesson)) {
-                        this.cart.push(lesson.id);
+                        this.cartLessons.push(lesson.id);
+                        this.cart.push(lesson.id)
                         this.isCartEmpty = false; //set to false when a lesson is added
                     }
                 },
                 showCheckout() {
-                    this.showLesson = !this.showLesson;
+                    this.showCheckoutPage = !this.showCheckoutPage;
                 },
 
                 submitForm() {alert('Order submitted')},
@@ -292,6 +366,14 @@
                 },
                 canAddToCart(lesson) {
                     return lesson.displaySpace > this.cartCount(lesson.id);
+                },
+
+                removeFromCart(lessonId){
+                    //Remove the lesson from the cartLessons array
+                    const index = this.cartLessons.indexOf(lessonId);
+                    if (index !== -1){
+                        this.cartLessons.splice(index, 1);
+                    }
                 }
             },
             computed: {
