@@ -138,12 +138,12 @@
                                             <!-- Add to cart -->
                                 <!-- </button> -->
                                 <br>
-                                <span v-if="lesson.displaySpace === cartCount(lesson.id)">
+                                <span v-if="computedDisplaySpace[index] === 0">
                                             All out!
                                 </span>
 
-                                <span v-else-if="lesson.displaySpace - cartCount(lesson.id) < 5">
-                                        Only {{ lesson.displaySpace - cartCount(lesson.id) }} left!
+                                <span v-else-if="computedDisplaySpace[index] < 5">
+                                        Only {{ computedDisplaySpace[index] }} left!
                                 </span>
                                 
 
@@ -339,14 +339,25 @@
                 cart: [],
                 showPlaceOrder: false,
                 displayCart: [],
+                computedDisplaySpace: function () {
+                        return this.lessons.map(lesson => {
+                        const countInCart = this.cartCount(lesson.id);
+                        return lesson.displaySpace - countInCart;
+                    });
+                },
             },
             //the methods of Vue instance
             methods: {
+
+
                 addToCart: function (lesson) {
                     if (this.canAddToCart(lesson)) {
+                        // console.log("before addToCart - Lesson.displaySpace:", lesson.displaySpace);
                         this.cartLessons.push(lesson.id);
                         this.cart.push(lesson.id)
                         this.isCartEmpty = false; //set to false when a lesson is added
+                        // lesson.displaySpace -= 1;
+                        // console.log("After addToCart - Lesson.displaySpace:", lesson.displaySpace);
                     }
                 },
                 showCheckout() {
@@ -365,7 +376,8 @@
                     return count;
                 },
                 canAddToCart(lesson) {
-                    return lesson.displaySpace > this.cartCount(lesson.id);
+                    const availableSpace = lesson.displaySpace - (this.availableSpaceMap[lesson.id] || 0);
+                    return availableSpace > 0;
                 },
 
                 removeFromCart(lessonId){
@@ -374,9 +386,44 @@
                     if (index !== -1){
                         this.cartLessons.splice(index, 1);
                     }
-                }
+
+                        // this.returnToLessonList(lessonId);
+                        // const lesson = this.lessons.find(lesson => lesson.id === lessonId);
+                        // if (lesson){
+                            // lesson.displaySpace += 1;
+                        // }
+                    
+
+                    const cartIndex = this.cart.indexOf(lessonId);
+                    if (cartIndex !== -1){
+                        this.cart.splice(cartIndex, 1);
+                    }
+
+                    this.isCartEmpty = this.cart.length === 0;
+
+                },
+
+                returnToLessonList(lessonId){
+                    const lessonToAddBack = this.lessons.find(lesson => lesson.id === lessonId);
+
+                    if(!this.lessons.some(lesson => lesson.id === lessonId )){
+                        this.lessons.push(lessonToAddBack);
+                    }
+
+                },
             },
             computed: {
+                availableSpaceMap(){
+                    const spaceMap = {};
+                    this.cart.forEach((lessonId) => {
+                        if (!spaceMap[lessonId]) {
+                            spaceMap[lessonId] = 0;
+                        }
+                        spaceMap[lessonId] += 1;
+                    });
+                    return spaceMap;
+                },
+
                 cartItemCount: function () {
                     return this.cart.length;
                 },
@@ -393,12 +440,13 @@
 
                     //sorting spaces
                     // sorting spaces
+                    
+                    // sorting spaces
                     if (this.sort.by === 'availability') {
                         return this.sort.order === 'asc' ?
                             lessonsArr.sort((a, b) => (a.displaySpace - this.cartCount(a.id)) - (b.displaySpace - this.cartCount(b.id))) :
                             lessonsArr.sort((a, b) => (b.displaySpace - this.cartCount(b.id)) - (a.displaySpace - this.cartCount(a.id)));
-                    }   
-
+                        }
 
                     // sorting subject
                     if (this.sort.by === 'subject') {
