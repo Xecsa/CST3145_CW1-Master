@@ -37,7 +37,7 @@
             
             <!--Search Bar-->
             <div class="search-bar" >
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder="Search" v-model.trim="search" @input="customSearch" />
             </div>
 
             <!--Checkout Button-->
@@ -263,6 +263,7 @@
                     orderConfirmationMessage: '',
                     name: '',
                     phone: '',
+                    search: '',
                     cartLessons:[],
                     lessons: lesson, // Assuming you have included lesson.js
 
@@ -327,6 +328,17 @@
                         return availableSpace > 0;
                     },
 
+                    customSearch(){
+                        const query = this.search.toLowerCase();
+
+                        return this.lessons.filter(
+                            (lesson) =>
+                            lesson.subject.toLowerCase().includes(query) ||
+                            lesson.location.toLowerCase().includes(query) ||
+                            lesson.price.toString().includes(query)
+                        );
+                    },
+
                     removeFromCart(lessonId){
                         //Remove the lesson from the cartLessons array
                         const index = this.cartLessons.indexOf(lessonId);
@@ -371,6 +383,11 @@
 
                     // search and sorting products
                     sortedLessons() {
+
+                        if (this.search !== ""){
+                            return this.customSearch();
+                        }else{
+
                         let lessonsArr = this.lessons.slice(0);
 
                         //sorting price
@@ -398,6 +415,7 @@
                                     return b.subject.localeCompare(subjectA);
                                 }
                             });
+                         
                          }
 
                         // sorting location
@@ -414,7 +432,8 @@
                         // Default case, return the original array
                         return lessonsArr;
                     }
-                }
+                },
+                },
         });
     </script>
 </body>
