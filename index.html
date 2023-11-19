@@ -9,6 +9,7 @@
             <!--Defineing the title of the page-->
             <title>Lessons Hub</title>
 
+            <!--Favicon-->
             <link rel="icon" type="image/png" href="images/favicon.png" />
 
             <!--Including the CND Link-->
@@ -169,6 +170,7 @@
                                 <div class="cart-item" v-for="lessonId in cartLessons" :key="lessonId">
                                     <div v-for="lesson in lessons" :key="lesson.id" v-if="lesson.id === lessonId" class="lesson-card">
                                         <div class="lesson-details" >
+                                            <!--Lesson image-->
                                             <div class="cart-item-image-container">
                                                 <figure>
                                                     <img class="cart-item-image" v-bind:src="lesson.image" >
@@ -202,6 +204,8 @@
                                                 </p>
                                             </div>
 
+
+                                            <!--'Remove form cart' button-->
                                             <button class="remove-from-cart-button" @click="removeFromCart(lesson.id)">
                                                 Remove
                                             </button>    
@@ -211,9 +215,9 @@
                             </div>
                     </div>
 
+                    <!-- Order Confirmation Message-->
                     <div v-if="orderConfirmationMessage" class="order-confirmation" >
                         {{ orderConfirmationMessage}}
-
                     </div>
 
                     <!--the checkout form -->
@@ -293,8 +297,8 @@
                     addToCart: function (lesson) {
                         if (this.canAddToCart(lesson)) {
                             this.cartLessons.push(lesson.id);
-                            this.cart.push(lesson.id)
-                            this.isCartEmpty = false; //set to false when a lesson is added
+                            this.cart.push(lesson.id) 
+                            this.isCartEmpty = false; //sets to false when a lesson is added
                         }
                      },
                     showCheckout() {
@@ -310,8 +314,11 @@
                     },
 
                     submitForm() {
-                       this.orderConfirmationMessage = 'Order submitted. Thank you!';
 
+                       // Gives the confirmation message  
+                       this.orderConfirmationMessage = 'Order submitted. Thank you!';
+                       
+                       //Displays an alert
                        alert('Order submitted. Thank you!');
                     },
 
@@ -330,9 +337,12 @@
                         return availableSpace > 0;
                     },
 
+                    //Search 
                     customSearch(){
+                        //Gets the lowercase search query
                         const query = this.search.toLowerCase();
 
+                        //Filters lessons based on the search query
                         return this.lessons.filter(
                             (lesson) =>
                             lesson.subject.toLowerCase().includes(query) ||
@@ -352,22 +362,28 @@
                         if (cartIndex !== -1){
                             this.cart.splice(cartIndex, 1);
                         }
-
+                        
+                        //Checks if the cart is empty
                         this.isCartEmpty = this.cart.length === 0;
 
                     },
 
                     returnToLessonList(lessonId){
+                        //Finds the lesson with the given lessonId in the lessons array
                         const lessonToAddBack = this.lessons.find(lesson => lesson.id === lessonId);
 
+                        // Checks if the lesson is not already in the lessons array before adding it
                         if(!this.lessons.some(lesson => lesson.id === lessonId )){
+                            //Adds the lesson back to the lessons array
                             this.lessons.push(lessonToAddBack);
+
                         }
 
                     },
                 },
 
                 computed: {
+                    // Computed property to calculate available space for each lesson
                     availableSpaceMap(){
                         const spaceMap = {};
                         this.cart.forEach((lessonId) => {
@@ -386,7 +402,9 @@
                     // search and sorting products
                     sortedLessons() {
 
+                        //Search
                         if (this.search !== ""){
+                            //Used the custom search function for search results
                             return this.customSearch();
                         }else{
 
