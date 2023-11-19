@@ -87,7 +87,6 @@ main {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 30px;
-    /* margin-left: 400px;  */
 }
 
 .lesson-card {
@@ -154,8 +153,6 @@ main {
 }
 
 #details {
-    /* padding-left: 20px; */
-    /* padding-bottom: 40px;   */
     display: inline-flex;
 }
 
@@ -164,7 +161,6 @@ main {
     width: 200px;
 
 }
-
 
 nav .search-bar {
     margin-top: 10px;
@@ -233,11 +229,11 @@ h1 {
 }
 
 .sort-options div {
-    margin-right: 15px; /* Adjust margin as needed */
+    margin-right: 15px; 
 
 }
 
-/* Radio button styles */
+
 .sort-options input[type="radio"] {
     display: none;
 }
@@ -308,7 +304,6 @@ h1 {
 
 #Checkout-cart .cart-item {
     display: flex;
-    /* align-items: center; */
     margin-bottom: 15px;
 }
 
@@ -329,7 +324,6 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* margin-top: 15px; */
     width: 200px;
     height: 300px;
 }
@@ -342,7 +336,6 @@ h1 {
 
 /* Style the remove-from-cart-button within lesson-details */
 #Checkout-cart .lesson-details .remove-from-cart-button {
-    /* margin-top: 10px; */
     background-color: #dc3545; /* Red color */
     color: #fff;
     border: none;
@@ -364,18 +357,63 @@ h1 {
     margin-right: 10px;
 }
 
+#checkout-form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center align the content */
 
+    /* Border styles */
+    border: 2px solid #3498db; /* Border color: a shade of blue */
+    border-radius: 8px; /* Border radius for rounded corners */
+}
 
+#checkout-form h2 {
+    margin-bottom: 20px;
+}
 
+#checkout-form form {
+    text-align: left;
+}
 
+#checkout-form p {
+    margin-bottom: 15px;
+}
 
+#checkout-form label {
+    display: inline-block;
+    width: 120px; /* Adjust the width of the labels as needed */
+}
 
+#checkout-form input {
+    display: inline-block;
+    width: calc(100% - 120px);
+    flex: 1; /* Take up remaining space */
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
 
+#checkout-form button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-
-
-
-
-
-
-
+#checkout-form button:hover {
+    background-color: #45a049;
+}
+/* Add this to your existing CSS or create a new style.css file */
+.order-confirmation {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #dff0d8; /* Bootstrap success alert color */
+    border: 1px solid #d6e9c6; /* Bootstrap success alert border color */
+    color: #3c763d; /* Bootstrap success alert text color */
+    border-radius: 4px;
+}
